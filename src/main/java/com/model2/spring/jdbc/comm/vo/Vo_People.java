@@ -14,8 +14,8 @@ import lombok.ToString;
 @AllArgsConstructor // 멤버변수를 사용하는 생성자
 // @Data
 public class Vo_People {
-	private String strId;
-	private String strName;
-	private String strAge;
-	private String strDati;
+	private String id;
+	private String name;
+	private String age;
+	private String dati;
 }

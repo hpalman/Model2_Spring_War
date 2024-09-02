@@ -1,66 +1,49 @@
-package com.model2.spring.jdbc.comm.dao;
+package com.model2.spring.jdbctemplate.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+//import java.sql.Connection;
+//import java.sql.PreparedStatement;
+//import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.model2.spring.jdbc.comm.DbConn;
+//import com.model2.spring.jdbc.comm.DbConn;
 import com.model2.spring.jdbc.comm.vo.Vo_People;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Repository
 @Slf4j
-public class Dao_People {
+public class Dao_jt_People {
 
-	Connection conn = null; // DB에 connection 된 객체를 저장
-	PreparedStatement ps = null; // connection 객체에 실행문을 던지는 역할(창수)
-	ResultSet rs = null;
+	@Autowired
+	JdbcTemplate template;
 	
 	// People의 값을 전부 가져오는 메서드
 	public List<Vo_People> doReadList() {
 		String qry = "";
-		DbConn dbConn = new DbConn();
-		conn = dbConn.getConn();
 		
 		List<Vo_People> list = new ArrayList<>();
 		
 		try {
 			// Result set, Print
-			qry = " SELECT ID, NAME, AGE, TO_CHAR(REG_DATE,'yyyy.mm.dd') as DATI"
-					+ "FROM PEOPLE"
+			qry = " SELECT ID, NAME, AGE, TO_CHAR(REG_DATE,'yyyy.mm.dd') as DATI" 
+					+ "FROM PEOPLE" 
 					+ "ORDER BY ID ";
-			ps = conn.prepareStatement(qry);
 			log.info(qry);
-			rs = ps.executeQuery();
 			
-			while ( rs.next() ) {
-				// People 생성자를 이용하여 값을 입력
-				Vo_People vo_People = new Vo_People(
-						  rs.getString("id")
-						, rs.getString("name")
-						, rs.getString("age")
-						, rs.getString("")
-						);
-				list.add(vo_People);
-			}
+			list = template.query(qry, new BeanPropertyRowMapper<Vo_People>(Vo_People.class));
+			
+			log.info("doReadList " + list.size());
+
 		} catch(Exception e) {
 			System.out.println("Error => " + e);
 		} finally {
 			// Close
-			try {
-				if ( rs != null) rs.close();
-				if ( ps != null) ps.close();
-				if ( conn != null) conn.close();
-				
-			} catch(Exception e) {
-				
-			}
 		}
 		return list;
 	}
@@ -78,7 +61,7 @@ public class Dao_People {
 					+ "WHERE ID = ?";
 			log.info(qry);
 			
-			// vo_People = template.queryForObject(qry, new BeanPropertyRowMapper<Vo_People>(Vo_People.class), id);
+			vo_People = template.queryForObject(qry, new BeanPropertyRowMapper<Vo_People>(Vo_People.class), id);
 			
 		} catch(Exception e) {
 			System.out.println("Error => " + e);
@@ -91,36 +74,21 @@ public class Dao_People {
 	// Id를 생성하는메서드
 	public int doCreate(Vo_People vo_People) {
 		String qry = "";
-		DbConn dbConn = new DbConn();
-		conn = dbConn.getConn();
-		
 		int intI = 0;
 		try {
 			// Rewult Set, Print
 			qry = " INSERT INTO PEOPLE(ID,NAME,AGE) "
 			     + "VALUES(?, ?, TO_NUMBER(?))";
-			ps = conn.prepareStatement(qry);
-			ps.setString(1,  vo_People.getId());
-			ps.setString(2,  vo_People.getName());
-			ps.setString(3,  vo_People.getAge());
 
 			log.info(qry);
 			
-			intI = ps.executeUpdate();
+			intI = template.update(qry, vo_People.getId(), vo_People.getName(), vo_People.getAge());
 			
 		} catch(Exception e) {
 			intI = 1;
 			System.out.println("Error => " + e);
 		} finally {
 			// Close
-			try {
-				if ( rs != null) rs.close();
-				if ( ps != null) ps.close();
-				if ( conn != null) conn.close();
-				
-			} catch(Exception e) {
-				
-			}
 		}
 		return intI;
 	}
@@ -138,7 +106,7 @@ public class Dao_People {
 
 			log.info(qry);
 			
-			// intI = template.update(qry, vo_People.getName(), vo_People.getAge(), vo_People.getId() );
+			intI = template.update(qry, vo_People.getName(), vo_People.getAge(), vo_People.getId() );
 			
 		} catch(Exception e) {
 			intI = 1;
@@ -160,7 +128,7 @@ public class Dao_People {
 
 			log.info(qry);
 			
-			//intI = template.update(qry, vo_People.getName(), vo_People.getAge(), vo_People.getId() );
+			intI = template.update(qry, vo_People.getName(), vo_People.getAge(), vo_People.getId() );
 			
 		} catch(Exception e) {
 			intI = -1;
@@ -170,5 +138,4 @@ public class Dao_People {
 		}
 		return intI;
 	}
-	
 }
