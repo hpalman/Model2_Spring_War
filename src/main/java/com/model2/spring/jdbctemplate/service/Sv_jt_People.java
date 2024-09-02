@@ -2,6 +2,7 @@ package com.model2.spring.jdbctemplate.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ public class Sv_jt_People implements Sv_jt_IfPeople {
 
 	Dao_jt_People dao_jt_People;
 	
-	//@Autowired
+	@Autowired
 	public Sv_jt_People(Dao_jt_People dao_jt_People) {
 		this.dao_jt_People = dao_jt_People;
 	}
