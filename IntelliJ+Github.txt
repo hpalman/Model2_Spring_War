@@ -1,0 +1,36 @@
+
+
+
+Successfully created project 'Model2_Spring_War' on GitHub,
+ but initial commit failed: Author identity unknown *** Please tell me who you are.
+ Run git config --global user.email "you@example.com" git config --global user.name "Your Name" to set your account's default identity.
+ Omit --global to set the identity only in this repository. unable to auto-detect email address (got
+
+hpalman@gmail.com
+hMonDang@!12  x ( 맞음)
+
+ckawhgdk@!12  
+
+
+ckawhgdk@!12
+
+
+Can't connect to any repository: https://github.com/hpalman/Model2_Spring_War.git (https://github.com/hpalman/Model2_Spring_War.git: not authorized)
+
+cat << EOF | sudo tee /etc/yum.repos.d/SCM-Manager.repo
+[scm-manager]
+name=SCM-Manager Repository
+baseurl=https://packages.scm-manager.org/repository/yum-v2-releases/
+enabled=1
+gpgcheck=1
+priority=1
+gpgkey=file:///etc/pki/rpm-gpg/SCM-Manager
+EOF
+
+sudo curl -o /etc/pki/rpm-gpg/SCM-Manager https://packages.scm-manager.org/repository/keys/gpg/oss-cloudogu-com.pub
+
+sudo yum install scm-server
+
+http://192.168.88.139:8080/scm
+http://192.168.88.139:8080
+
