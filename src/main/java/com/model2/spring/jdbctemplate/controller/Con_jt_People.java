@@ -8,10 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.model2.spring.jdbc.comm.vo.Vo_People;
+import com.model2.spring.vo.Vo_People;
 import com.model2.spring.jdbctemplate.service.Sv_jt_People;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/jdbctemplate")
@@ -34,6 +34,8 @@ public class Con_jt_People {
 		list = sv_jt_People.doReadList();
 		
 		model.addAttribute("people", list);
+		model.addAttribute("path",  "jdbctemplate");
+
 		return "jdbc/list";
 	}
 	

@@ -1,4 +1,4 @@
-package com.model2.spring.jdbctemplate.service;
+package com.model2.spring.mybatis.service;
 
 import java.util.List;
 
@@ -8,21 +8,22 @@ import org.springframework.stereotype.Service;
 //import com.model2.spring.jdbc.comm.dao.Dao_People;
 import com.model2.spring.vo.Vo_People;
 import com.model2.spring.jdbctemplate.dao.Dao_jt_People;
+import com.model2.spring.mybatis.dao.Dao_If_People;
 
 @Service
-public class Sv_jt_People implements Sv_jt_IfPeople {
+public class Sv_mbt_People implements Sv_mbt_IfPeople {
 
-	Dao_jt_People dao_jt_People;
+	Dao_If_People dao_People;
 	
 	//@Autowired
-	public Sv_jt_People(Dao_jt_People dao_jt_People) {
-		this.dao_jt_People = dao_jt_People;
+	public Sv_mbt_People(Dao_If_People dao_People) {
+		this.dao_People = dao_People;
 	}
 	
 	// People의 값을 전부 가져오는 메서드
 	@Override
 	public List<Vo_People> doReadList() {
-		List<Vo_People> list = dao_jt_People.doReadList();
+		List<Vo_People> list = dao_People.doReadList();
 		return list;
 	}
 
@@ -42,7 +43,7 @@ public class Sv_jt_People implements Sv_jt_IfPeople {
 
 	// Id를 생성하는 메서드
 	@Override
-	public int doCreate(Vo_People vo_PeoPle) {
+	public int doCreate(String id, String name, String age) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

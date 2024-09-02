@@ -2,7 +2,7 @@ package com.model2.spring.jdbc.comm.service;
 
 import java.util.List;
 
-import com.model2.spring.jdbc.comm.vo.Vo_People;
+import com.model2.spring.vo.Vo_People;
 
 public interface Sv_IfPeople {
 	

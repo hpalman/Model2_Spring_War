@@ -1,10 +1,13 @@
-package com.model2.spring.jdbctemplate.service;
+package com.model2.spring.mybatis.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.model2.spring.vo.Vo_People;
 
-public interface Sv_jt_IfPeople {
+@Mapper
+public interface Dao_If_People {
 	
 	// 전체 리스트 가져오기
 	public List<Vo_People> doReadList();
@@ -13,7 +16,7 @@ public interface Sv_jt_IfPeople {
 	public Vo_People doReadId(String id);
 	
 	// 데이터 로우 생성하기
-	public int doCreate(Vo_People vo_PeoPle); 
+	public int doCreate(String id, String name, String age); 
 	
 	// 특정 Id 정보 수정하기
 	public int doUpdate(Vo_People vo_PeoPle);

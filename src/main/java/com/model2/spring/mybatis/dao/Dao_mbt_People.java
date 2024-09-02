@@ -1,4 +1,4 @@
-package com.model2.spring.jdbctemplate.dao;
+package com.model2.spring.mybatis.dao;
 
 //import java.sql.Connection;
 //import java.sql.PreparedStatement;
@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Repository
 @Slf4j
-public class Dao_jt_People {
+public class Dao_mbt_People {
 
 	@Autowired
 	JdbcTemplate template;

@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.model2.spring.jdbc.comm.DbConn;
-import com.model2.spring.jdbc.comm.vo.Vo_People;
+import com.model2.spring.vo.Vo_People;
 
 import lombok.extern.slf4j.Slf4j;
 

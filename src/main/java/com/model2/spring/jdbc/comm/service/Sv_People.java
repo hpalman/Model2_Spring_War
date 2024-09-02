@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.model2.spring.jdbc.comm.dao.Dao_People;
-import com.model2.spring.jdbc.comm.vo.Vo_People;
+import com.model2.spring.vo.Vo_People;
 
 @Service
 public class Sv_People implements Sv_IfPeople {

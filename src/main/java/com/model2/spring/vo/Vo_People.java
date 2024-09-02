@@ -1,4 +1,4 @@
-package com.model2.spring.jdbc.comm.vo;
+package com.model2.spring.vo;
 
 import lombok.AllArgsConstructor;
 //import lombok.Data;
